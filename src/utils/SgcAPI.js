@@ -1,44 +1,71 @@
-const api = "http://localhost:50640/api"
+const api = "http://localhost:60528/api"
 
-
-// Generate a unique token for storing your bookshelf data on the backend server.
-// let token = localStorage.token
-// if (!token)
-//   token = localStorage.token = Math.random().toString(36).substr(-8)
+let token = localStorage.getItem('token')
 
 const headers = {
-//   'Accept': 'application/json',
-//   'Authorization': token
+  'Accept': 'application/json',
+  'Authorization': `Bearer ${token}`
 }
 
-// export const get = (bookId) =>
-//   fetch(`${api}/books/${bookId}`, { headers })
-//     .then(res => res.json())
-//     .then(data => data.book)
-
-export const getAll = () =>
-  fetch(`${api}/values`, { headers })
+export const getAllCategories = () =>
+  fetch(`${api}/category`, { headers })
     .then(res => res.json())
-    .then(data => data)
 
-// export const update = (book, shelf) =>
-//   fetch(`${api}/books/${book.id}`, {
-//     method: 'PUT',
-//     headers: {
-//       ...headers,
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify({ shelf })
-//   }).then(res => res.json())
+export const getAllDemands = () =>
+  fetch(`${api}/demand/all`, { headers })
+    .then(res => res.json())
 
-export const login = (userName, password) =>{
-    console.log(JSON.stringify({ userName, password }))
+export const getDemandById = (demandId) =>
+  fetch(`${api}/demand/${demandId}`, { headers })
+    .then(res => res.json())
+
+export const createDemand = (demand) =>{
+  return fetch(`${api}/demand`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(demand)
+  }).then(res => res.json())
+}
+
+export const updateDemand = (demandId, demand) =>
+  fetch(`${api}/demand/${demandId}`, {
+    method: 'PUT',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(demand)
+  }).then(res => res.json())
+
+export const removeDemand = (demandId) =>
+  fetch(`${api}/demand/${demandId}`, {
+    method: 'DELETE',
+    headers: {
+      ...headers
+    }
+}).then(res => res.json())
+
+export const register = (user) =>{
+  return fetch(`${api}/users`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(user)
+  }).then(res => res.json())
+}
+
+export const login = (credentials) =>{
   return fetch(`${api}/users/login`, {
     method: 'POST',
     headers: {
       ...headers,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ userName, password })
+    body: JSON.stringify(credentials)
   }).then(res => res.json())
 }

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import serializeForm from 'form-serialize';
-
-
+import PropTypes from 'prop-types';
 
 class Login extends Component {
 
@@ -9,7 +8,7 @@ class Login extends Component {
         e.preventDefault();
         const credentials = serializeForm(e.target, {hash: true});
         if (this.props.onAuthentication)
-            this.props.onAuthentication(credentials,this.props.history);
+            this.props.onAuthentication(credentials);
     }
 
     render() {
@@ -40,6 +39,11 @@ class Login extends Component {
             </div>
         )
     }
+}
+
+Login.propTypes = {
+    onAuthentication: PropTypes.func.isRequired,
+    error: PropTypes.string
 }
 
 export default Login

@@ -12,34 +12,50 @@ class App extends Component {
     loginError: ''
   }
 
-  componentDidMount() {
-    // SgcAPI.login('joao@domain.com','123123')
-    //   .then(value => console.log(value));
-    //  SgcAPI.getAll().then(val => console.log(val));
+  componentWillMount() {
+    if(localStorage.getItem('token')) {
+      this.setState({isAuthenticated: true})
+    }
   }
 
-  authentication = (credentials) => {
-    this.setState({token: '123'})
+  logoff = () => {
+    localStorage.removeItem('token')
+    this.setState({isAuthenticated: false})
+  }
 
-    if (!credentials.username || !credentials.password) {
-      this.setState({loginError: 'Nome de usuário ou senha inválidos.'})
-      return false;
-    }
-    return true;
+  authentication = (credentials, history) => {
+    SgcAPI.login(credentials)
+      .then(result => {
+        result = JSON.parse(result)
+        if (result['id']) {
+          this.setState({isAuthenticated: true})
+          localStorage.setItem('token', result['auth_token'])
+          localStorage.setItem('userName', result['userName'])
+          history.push('/')
+        }
+      })
+      .catch(reason => this.setState({loginError: 'Nome de usuário ou senha inválidos.'}))
   }
 
   render() {
     return (
       <div className="App">
-        <Route exact path="/" render={ () => 
-          this.state.token ? (<Application/>) : (<Redirect to="/login"/>)
+        <Route exact path="/" render={ ({history}) => 
+          this.state.isAuthenticated ? 
+            (<Application
+              onLogout={() => {
+                this.logoff();
+                history.push('/login')
+              }}
+            />) : 
+            (<Redirect to="/login"/>)
         }/>
         <Route path="/login" render={({history}) => (
           <Login
             onAuthentication={(credentials) => {
-              if (this.authentication(credentials))
-                history.push('/')
-            }}
+                this.authentication(credentials, history)
+              }
+            }
             error={this.state.loginError}
           />
         )}/>
