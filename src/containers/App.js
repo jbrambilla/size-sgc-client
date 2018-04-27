@@ -4,8 +4,20 @@ import './../App.css';
 import Header from './../components/Header';
 import {Route} from 'react-router-dom';
 import Login from '../components/Login';
+import * as SgcAPI from './../utils/SgcAPI';
 
 class App extends Component {
+
+  state = {
+    token: ''
+  }
+
+  componentDidMount() {
+    // SgcAPI.login('joao@domain.com','123123')
+    //   .then(value => console.log(value));
+    //  SgcAPI.getAll().then(val => console.log(val));
+  }
+
   render() {
     return (
       <div className="App">
