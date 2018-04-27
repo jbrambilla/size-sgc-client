@@ -1,27 +1,28 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Header(props) {
     return (
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-          <a class="navbar-brand" href="#">SGC</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div className="container">
+          <a className="navbar-brand" href="#">SGC</a>
+          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
           </button>
 
-            <div class="collapse navbar-collapse" id="navbarColor02">
-                <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            <div className="collapse navbar-collapse" id="navbarColor02">
+                <ul className="navbar-nav mr-auto">
+                <li className="nav-item active">
+                    <Link className="nav-link" to="/">Home <span class="sr-only">(current)</span></Link>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Chamados</a>
+                <li className="nav-item">
+                    <a className="nav-link" href="#">Chamados</a>
                 </li>
                 </ul>
             </div>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a class="nav-link" href="#"></a></li>
-                <li><a class="nav-link" href="#">Logout</a></li>
+            <ul className="nav navbar-nav navbar-right">
+                <li><Link className="nav-link" to="/login">Login</Link></li>
+                <li><a className="nav-link" href="#"></a></li>
             </ul>
           </div>
         </nav>
