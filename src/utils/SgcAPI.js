@@ -1,6 +1,6 @@
-const api = "http://localhost:60528/api"
+const api = "http://localhost:50640/api"
 
-let token = localStorage.getItem('token')
+let token = localStorage.getItem('auth_token')
 
 const headers = {
   'Accept': 'application/json',

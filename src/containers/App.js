@@ -11,17 +11,18 @@ class App extends Component {
 
   state = {
     loginError: '',
-    registerSuccess: false
+    registerSuccess: false,
+    registerFailed: false
   }
 
   componentWillMount() {
-    if(localStorage.getItem('token')) {
+    if(localStorage.getItem('auth_token')) {
       this.setState({isAuthenticated: true})
     }
   }
 
   logoff = () => {
-    localStorage.removeItem('token')
+    localStorage.removeItem('auth_token')
     this.setState({isAuthenticated: false})
   }
 
@@ -31,7 +32,7 @@ class App extends Component {
         result = JSON.parse(result)
         if (result['id']) {
           this.setState({isAuthenticated: true})
-          localStorage.setItem('token', result['auth_token'])
+          localStorage.setItem('auth_token', result['auth_token'])
           localStorage.setItem('userName', result['userName'])
           history.push('/')
         }
@@ -44,9 +45,14 @@ class App extends Component {
       .then(result => {
         if (result === 'Account created') {
           this.setState({registerSuccess: true})
+          history.push('/login')
         } else {
-          
+          this.setState({registerFailed: true})
         }
+      })
+      .catch(reason => {
+        this.setState({registerFailed: true})
+        console.log(reason)
       })
   }
 
@@ -70,6 +76,7 @@ class App extends Component {
               }
             }
             error={this.state.loginError}
+            registerSuccess={this.state.registerSuccess}
           />
         )}/>
         <Route path="/register" render={({history}) => (
@@ -77,7 +84,7 @@ class App extends Component {
             onRegister={(user) => {
               this.registerUser(user, history)
             }}
-            success={this.state.registerSuccess}
+            failed={this.state.registerFailed}
           />
         )}
         

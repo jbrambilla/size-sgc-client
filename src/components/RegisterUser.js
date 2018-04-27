@@ -18,7 +18,7 @@ class RegisterUser extends Component {
                 <div className="row">
                     <div className="card">
                         <article className="card-body">
-                            {this.props.success && ( <p className="text-success">Conta criada com suceso!</p>)}
+                            {this.props.failed && ( <p className="text-danger">Algo deu errado com o servidor.</p>)}
                             <Link to="/login" className="float-right btn btn-outline-primary">Login</Link>
                             <h4 className="card-title mb-4 mt-1">Registre-se</h4>
                             <form onSubmit={this.handleSubmit}>
@@ -47,7 +47,8 @@ class RegisterUser extends Component {
 }
 
 RegisterUser.propTypes = {
-    onRegister: PropTypes.func.isRequired
+    onRegister: PropTypes.func.isRequired,
+    failed: PropTypes.bool
 }
 
 export default RegisterUser;

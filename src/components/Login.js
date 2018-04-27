@@ -19,6 +19,7 @@ class Login extends Component {
                     <div className="card">
                         <article className="card-body">
                             {this.props.error && ( <p className="text-danger">{this.props.error}</p>)}
+                            {this.props.registerSuccess && ( <p className="text-success">Conta criada com suceso! Faça Login abaixo.</p>)}
                             <Link to="/register" className="float-right btn btn-outline-primary">Registrar-se</Link>
                             <h4 className="card-title mb-4 mt-1">Entrar</h4>
                             <form onSubmit={this.handleSubmit}>
