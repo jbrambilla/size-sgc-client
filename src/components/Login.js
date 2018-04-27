@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import serializeForm from 'form-serialize';
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 
 class Login extends Component {
 
@@ -18,7 +19,7 @@ class Login extends Component {
                     <div className="card">
                         <article className="card-body">
                             {this.props.error && ( <p className="text-danger">{this.props.error}</p>)}
-                            <a href="" className="float-right btn btn-outline-primary">Registrar-se</a>
+                            <Link to="/register" className="float-right btn btn-outline-primary">Registrar-se</Link>
                             <h4 className="card-title mb-4 mt-1">Entrar</h4>
                             <form onSubmit={this.handleSubmit}>
                                 <div className="form-group">

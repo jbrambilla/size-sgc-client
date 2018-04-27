@@ -5,11 +5,13 @@ import Application from './../components/Application';
 import {Route, Redirect} from 'react-router-dom';
 import Login from '../components/Login';
 import * as SgcAPI from './../utils/SgcAPI';
+import RegisterUser from './../components/RegisterUser';
 
 class App extends Component {
 
   state = {
-    loginError: ''
+    loginError: '',
+    registerSuccess: false
   }
 
   componentWillMount() {
@@ -37,6 +39,17 @@ class App extends Component {
       .catch(reason => this.setState({loginError: 'Nome de usuário ou senha inválidos.'}))
   }
 
+  registerUser = (user, history) => {
+    SgcAPI.registerUser(user)
+      .then(result => {
+        if (result === 'Account created') {
+          this.setState({registerSuccess: true})
+        } else {
+          
+        }
+      })
+  }
+
   render() {
     return (
       <div className="App">
@@ -59,6 +72,16 @@ class App extends Component {
             error={this.state.loginError}
           />
         )}/>
+        <Route path="/register" render={({history}) => (
+          <RegisterUser
+            onRegister={(user) => {
+              this.registerUser(user, history)
+            }}
+            success={this.state.registerSuccess}
+          />
+        )}
+        
+        />
       </div>
     )
   }

@@ -48,7 +48,7 @@ export const removeDemand = (demandId) =>
     }
 }).then(res => res.json())
 
-export const register = (user) =>{
+export const registerUser = (user) =>{
   return fetch(`${api}/users`, {
     method: 'POST',
     headers: {
