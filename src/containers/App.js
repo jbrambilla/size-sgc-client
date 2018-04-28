@@ -17,9 +17,7 @@ class App extends Component {
   }
 
   componentWillMount() {
-    if(localStorage.getItem('auth_token')) {
-      this.setState({isAuthenticated: true})
-    }
+    this.setState({isAuthenticated: false})
   }
 
   logoff = () => {

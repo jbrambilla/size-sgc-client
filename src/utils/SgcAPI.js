@@ -1,4 +1,4 @@
-const api = "http://localhost:50640/api"
+const api = "http://alissonerdx-001-site1.itempurl.com/api"
 
 let token = localStorage.getItem('auth_token')
 
