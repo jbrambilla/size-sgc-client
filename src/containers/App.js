@@ -60,7 +60,7 @@ class App extends Component {
   render() {
     let userName = localStorage.getItem('userName')
     return (
-      <div className="App">
+      <div>
         {this.state.isAuthenticated  ? (
           <div>
             <NavbarMenu

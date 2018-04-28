@@ -11,6 +11,10 @@ export const getAllCategories = () =>
   fetch(`${api}/category`, { headers })
     .then(res => res.json())
 
+export const getCategoryById = (categoryId) =>
+  fetch(`${api}/category/${categoryId}`, { headers })
+    .then(res => res.json())
+
 export const getAllDemands = () =>
   fetch(`${api}/demand/all`, { headers })
     .then(res => res.json())

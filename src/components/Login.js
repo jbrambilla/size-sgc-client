@@ -14,6 +14,7 @@ class Login extends Component {
 
     render() {
         return (
+            <div className="App">
             <div className="container h-100 d-flex align-items-center justify-content-center">
                 <div className="row">
                     <div className="card">
@@ -38,6 +39,7 @@ class Login extends Component {
                         </article>
                     </div>
                 </div>
+            </div>
             </div>
         )
     }
