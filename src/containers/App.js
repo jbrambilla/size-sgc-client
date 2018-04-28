@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import logo from './../logo.svg';
 import './../App.css';
-import Application from './../components/Application';
 import {Route, Redirect} from 'react-router-dom';
 import Login from '../components/Login';
 import * as SgcAPI from './../utils/SgcAPI';
 import RegisterUser from './../components/RegisterUser';
+import NavbarMenu from '../components/NavbarMenu';
+import Content from '../components/Content';
 
 class App extends Component {
 
@@ -57,18 +58,24 @@ class App extends Component {
   }
 
   render() {
+    let userName = localStorage.getItem('userName')
     return (
       <div className="App">
-        <Route exact path="/" render={ ({history}) => 
-          this.state.isAuthenticated ? 
-            (<Application
+        {this.state.isAuthenticated  ? (
+          <div>
+            <NavbarMenu
+              userName={userName}
               onLogout={() => {
                 this.logoff();
-                history.push('/login')
+                <Redirect to="/login"/>
               }}
-            />) : 
-            (<Redirect to="/login"/>)
-        }/>
+              
+            />
+            <Content />
+          </div>
+        ) : 
+        (<Redirect to="/login"/>)}
+
         <Route path="/login" render={({history}) => (
           <Login
             onAuthentication={(credentials) => {
